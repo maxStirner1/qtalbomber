@@ -1,0 +1,45 @@
+Bomberman
+=========
+
+
+Syntaxe à respecter
+-------------------
+
+indentation : 		K&R style (référence wikipédia) 
+			retour à la ligne après l'accolade ouvrante pas avant
+
+Nom des variables : 	utilisation des underscore, pas de camelcase
+& attribut					exemple : ma_variable
+						et non pas : MaVariable
+
+Nom de classe :		en camelcase (cf cours UML)
+& fonctions
+
+logiciels employés :	argo UML 0.30
+			compilateur g++
+			librairie graphique sfml (car en c++)
+			avec très probable intégration de Qt	
+
+Fichier texte :		en .txt
+
+
+Données stockées :	map dans un dossier contenant les différentes images des 				éléments => facilement éditable
+				perso idem
+
+Gestionnaire de version : 	git
+
+
+
+Généralité : jeu
+----------------
+
+A chaque fin de round un nbr de point est attribué au joueurs (3 pour le gagnant, 2 pour le second, etc…) qui servira à déterminer le gagnant à l'issu des n rounds
+
+Donc mode de jeu survivant, le dernier en vie gagne le round peu importe le nbr de kill
+ex : J1 tue J2 & J3 mais se suicide par inadvertance => J4 gagne le round sans avoir tué personne.
+
+
+
+
+
+
