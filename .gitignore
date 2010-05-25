@@ -1,0 +1,14 @@
+syntax: glob
+
+src/Makefile
+src/*.o
+src/.dep.inc
+src/build/*
+src/dist/*
+src/nbproject/*
+src/moc_*
+src/qrc_*
+src/*.qtal
+src/qtalbomber
+
+
