@@ -48,6 +48,8 @@ private:
     QMap<int, QComboBox*> m_playersType;
     /// Player controls input
     QMap<int, QMap<QString, QLineEdit*> > m_playersControl;
+    /// Player keys configuration : (playerId, (key, action))
+    QMap<int, QMap<int, QString> > m_playersKey;
     /// Numbers of round
     QSpinBox* m_gameRounds;
     /// Combo box containing map list
@@ -55,6 +57,7 @@ private:
 
     void setPlayerColor(int playerId, QColor color);
     QString layoutTitle();
+    void setDefaultKeys();
 };
 
 #endif	/* _MULTYPLAYERUI_H */

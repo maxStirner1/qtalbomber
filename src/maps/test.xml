@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<qtalmap xmlns="http://www.bombermanproject.com"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.bombermanproject.com qtalbomber.xsd">
+  <map>
+    _______________
+    _#_#_#_#_#_#_#_
+    _______________
+    _#_#_#_#_#_#_#_
+    _______________
+    _#_#_#_#_#_#_#_
+    _______________
+    _#_#_#_#_#_#_#_
+    _______________
+    _#_#_#_#_#_#_#_
+    _______________
+    _#_#_#_#_#_#_#_
+    _______________
+    _#_#_#_#_#_#_#_
+    _______________
+  </map>
+  <name>Another Map</name>
+  <author>Me</author>
+  <description>
+    A description for bloody players.
+  </description>
+</qtalmap>

@@ -13,5 +13,8 @@
 /// Default player color. A Qt color constants
 #define PLAYER_DEFAULT_COLOR "#00FF00"
 
+/// Directory of the maps
+#define MAPS_DIRECTORY "maps"
+
 #endif	/* _QTALBOMBER_H */
 
