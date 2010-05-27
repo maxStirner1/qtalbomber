@@ -33,8 +33,6 @@ private:
     QString m_playerPseudo;
     /// Player status
     int m_playerAlive;
-    /// Player position
-    int m_playerPosition;
     /// Player type (real, bot)
     int m_playerType;
     /// Player color
@@ -49,6 +47,8 @@ private:
     int m_playerLifes;
 
     void initPlayer();
+    int heightFromPos(int pos);
+    int widthFromPos(int pos);
 };
 
 #endif	/* _PLAYER_H */

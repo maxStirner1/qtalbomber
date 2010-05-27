@@ -16,6 +16,7 @@
 #include <QtGui/QLabel>
 #include "game/map.h"
 #include "game/player.h"
+#include "handler/eventhandler.h"
 #include "ui/baseui.h"
 
 #include <QtCore/QDebug>
@@ -30,11 +31,20 @@ public:
     Gamefield(QWidget* parent);
     void setPlayersList(QMap<int, Player *> players);
     QMap<int, Player *> playersList();
+    void setEventHandler(EventHandler* eventHandler);
+    EventHandler* eventHandler();
     void setGameRounds(int rounds);
     int gameRounds();
     void setMap(Map* map);
     Map* gameMap();
     void drawMap();
+
+signals:
+    void movePlayer(int player, int position);
+
+private slots:
+    void onPlayerMove(int player, QString move);
+    void onBombDrop(int player);
 
 private:
     /// Map of the gamefield
@@ -55,6 +65,8 @@ private:
     QMap<int, QLabel*> m_playersInfoWidget;
     /// State of the game
     int m_gameState;
+    /// Gamefield event handler
+    EventHandler* m_eventHandler;
 
     void keyPressEvent(QKeyEvent* event);
     int heightFromPos(int pos);

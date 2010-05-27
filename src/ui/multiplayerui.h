@@ -4,6 +4,8 @@
 #include <QtCore/QObject>
 #include <QtCore/QMap>
 #include <QtCore/QList>
+#include <QtCore/QMapIterator>
+#include <QtCore/QString>
 #include <QtGui/QApplication>
 #include <QtGui/QColor>
 #include <QtGui/QPushButton>
@@ -53,7 +55,7 @@ private:
     QMap<int, QComboBox*> m_playersType;
     /// Player controls input
     QMap<int, QMap<QString, QLineEdit*> > m_playersControl;
-    /// Player keys configuration : (playerId, (key, action))
+    /// Player keys configuration : (key, (playerId, action))
     QMap<int, QMap<int, QString> > m_playersKey;
     /// Numbers of round
     QSpinBox* m_gameRounds;

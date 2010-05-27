@@ -22,7 +22,6 @@ void Player::initPlayer() {
     m_playerAlive = true;
     m_bombCapacity = 1;
     m_bombRange = 3;
-    m_playerPosition = 0;
 }
 
 /*! Setter for the player color.

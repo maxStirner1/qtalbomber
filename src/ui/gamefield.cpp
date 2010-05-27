@@ -164,10 +164,10 @@ int Gamefield::gameRounds() {
  *
  *  @param event The recieved event
  *
- *  
+ *  All the events are forwarded to the event handler.
  */
 void Gamefield::keyPressEvent(QKeyEvent* event) {
-    // YODO: think about event handler...
+    m_eventHandler->newEvent(event);
 }
 
 /*! Setter for the gamefield map.
@@ -188,6 +188,98 @@ void Gamefield::setMap(Map* map) {
  */
 Map* Gamefield::gameMap() {
     return m_map;
+}
+
+/*! Set the gamefield event handler.
+ *
+ *  @param eventHandler Gamefield event handler.
+ *
+ *  @see Gamefield::eventHandler
+ */
+void Gamefield::setEventHandler(EventHandler* eventHandler) {
+    m_eventHandler = eventHandler;
+
+    QObject::connect(m_eventHandler, SIGNAL(playerMoved(int, QString)), this,
+        SLOT(onPlayerMove(int, QString)));
+    QObject::connect(m_eventHandler, SIGNAL(bombDropped(int)), this,
+        SLOT(onBombDrop(int)));
+    QObject::connect(this, SIGNAL(movePlayer(int, int)), m_eventHandler,
+        SLOT(onPlayerMove(int, int)));
+}
+
+/*! Try to move a player to a requested position
+ *
+ *  @param player Player Id to move
+ *  @param move Move action to do
+ */
+void Gamefield::onPlayerMove(int player, QString move) {
+    int playerPosition = m_map->playersPositions().indexOf(player+1);
+
+    if (move == "left") {
+        if (!m_map->collisionsTab().at(playerPosition-1)) {
+            playerPosition--;
+        }
+        else
+            return;
+    }
+    else if (move == "right") {
+        if (!m_map->collisionsTab().at(playerPosition+1)) {
+            playerPosition++;
+        }
+        else
+            return;
+    }
+    else if (move == "up") {
+        int newPos = playerPosition-m_map->mapWidth();
+        if (newPos  >= 0 && !m_map->collisionsTab().at(newPos)) {
+            playerPosition = newPos;
+        }
+        else
+            return;
+    }
+    else if (move == "down") {
+        int newPos = playerPosition+m_map->mapWidth();
+        if (newPos < m_map->collisionsTab().count()
+            && !m_map->collisionsTab().at(newPos)) {
+            playerPosition = newPos;
+        }
+        else
+            return;
+    }
+    else
+        return;
+
+    // Set the new position on the map
+    m_map->setPlayerPosition(player+1, playerPosition);
+    
+    // Move the player on the gamefield
+    int playerIdxList = m_playersList.keys().indexOf(player);
+    m_playersList.value(playerIdxList)->setPos(widthFromPos(playerPosition),
+        heightFromPos(playerPosition));
+
+    // Send infos that player has moved
+    emit movePlayer(player, playerPosition);
+}
+
+/*!
+ *
+ *  @param player Player who drop the bomb
+ */
+void Gamefield::onBombDrop(int player) {
+    // TODO: drop bomb
+}
+
+/*! Event handler of the gamefield.
+ *
+ *  @return The gamefield event handler.
+ *
+ *  The event handler manage and parse the event of the gamefield.
+ *
+ *  @see Gamefield::setEventHandler
+ *  @see EventHandler
+ */
+EventHandler* Gamefield::eventHandler() {
+    return m_eventHandler;
 }
 
 /*! Title of the layout
