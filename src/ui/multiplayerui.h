@@ -38,6 +38,7 @@ private slots:
     void changePlayerColor();
     void displayStartUI();
     void startGame();
+    void selectMap(int index);
 
 private:
     /// Pointer to the parent who created the instance
@@ -60,6 +61,8 @@ private:
     QComboBox* m_mapComboBox;
     /// Instances of the availables maps
     QMap<int, Map*> m_mapList;
+    /// Selected map
+    int m_selectedMap;
 
     void loadMaps();
     void setPlayerColor(int playerId, QColor color);

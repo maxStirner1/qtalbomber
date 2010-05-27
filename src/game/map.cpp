@@ -97,7 +97,7 @@ void Map::cleanMapString() {
  */
 void Map::appendBorders() {    
     // Append side border
-    int lines = m_mapString.split('\n').count();
+    int lines = m_mapString.length()/m_mapWidth;
     for (int i = 0; i < lines; i++) {
         m_mapString.insert(i*(m_mapWidth+2), "#");
         m_mapString.insert(i*(m_mapWidth+2)+m_mapWidth+1, "#");
@@ -130,9 +130,6 @@ void Map::appendBorders() {
 void Map::parseMapString() {
     // Append the border to the map
     appendBorders();
-
-    // Remove the line break of the map
-    m_mapString = m_mapString.replace("\\n", "");
 
     for (int i = 0; i < m_mapString.length(); i++) {
         if (m_mapString.at(i) == '_') {

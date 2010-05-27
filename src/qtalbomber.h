@@ -29,6 +29,7 @@
 #define BLOCK_SPACING 4
 
 /// Player type
+#define PLAYER_IS_NONE 0
 #define PLAYER_IS_REAL 1
 #define PLAYER_IS_BOT 2
 // Used only with network

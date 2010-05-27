@@ -1,6 +1,8 @@
 #include "ui/multiplayerui.h"
 #include "ui/gameui.h"
 #include "ui/startui.h"
+#include "ui/gamefield.h"
+#include "game/player.h"
 
 MultiplayerUI::MultiplayerUI(QWidget* parent) : m_parent(parent) {
     // TODO: disable field when player is none (or a bot)
@@ -82,6 +84,8 @@ MultiplayerUI::MultiplayerUI(QWidget* parent) : m_parent(parent) {
     gameLayout->addWidget(m_mapComboBox, 1, 1, Qt::AlignLeft);
     QPushButton* moreInfoButton = new QPushButton(tr("Infos"));
     gameLayout->addWidget(moreInfoButton, 1, 2, Qt::AlignLeft);
+    QObject::connect(m_mapComboBox, SIGNAL(activated(int)), this,
+        SLOT(selectMap(int)));
 
     // Action buttons
     QPushButton* playButton = new QPushButton(tr("Play"));
@@ -99,6 +103,10 @@ MultiplayerUI::MultiplayerUI(QWidget* parent) : m_parent(parent) {
 
     // Loads the maps
     loadMaps();
+
+    // Select by default the first map
+    if (m_mapList.count() > 0)
+        m_selectedMap = 0;
 }
 
 /*! Display a color dialog to let user choose is player color
@@ -193,6 +201,7 @@ void MultiplayerUI::loadMaps() {
     if (!mapsDir.cd(QObject::tr("%1/%2").arg(QApplication::applicationDirPath()).arg(MAPS_DIRECTORY)))
         return;
 
+    // Maps must have an .xml extension
     QStringList mapsExt("*.xml");
     mapsDir.setFilter(QDir::Files);
     mapsDir.setNameFilters(mapsExt);
@@ -203,12 +212,13 @@ void MultiplayerUI::loadMaps() {
         if (!mapInfo.isReadable())
             continue;
 
+        // Discard the map if not valid
         Map* gameMap = new Map(mapInfo);
         if (!gameMap->isValid())
             continue;
 
         m_mapComboBox->addItem(gameMap->mapName());
-        m_mapList[m_mapComboBox->currentIndex()] = gameMap;
+        m_mapList[m_mapList.count()] = gameMap;
     }
 }
 
@@ -217,26 +227,36 @@ void MultiplayerUI::loadMaps() {
  *  Each player have to chose a differents color but pseudo can be the same. 
  */
 void MultiplayerUI::startGame() {
+    // Store error message
     QString errorMsg = "";
+    // Count inactive players
     int nonePlayers = 0;
+    // Register the players
+    QMap<int, Player*> playerList;
 
     for (int i = 0; i < PLAYER_NUMBER; i++) {
-        if (m_playersType[i]->currentText() == tr("None")) {
+        if (m_playersType.value(i)->currentIndex() == PLAYER_IS_NONE) {
             nonePlayers++;
             continue;
         }
-        
-        if (m_playersPseudo[i]->text().trimmed().length() < 3) {
+
+        Player* player = new Player(m_playersPseudo.value(i)->text(),
+            m_playersColor.value(i), m_playersType.value(i)->currentIndex());
+        playerList[i] = player;
+
+        // Check pseudo length
+        if (m_playersPseudo.value(i)->text().trimmed().length() < 3) {
             errorMsg = tr("Pseudo for player %1 must be at least 3 character long").arg(i+1);
             break;
         }
 
+        // Check that two players don't have the same colors (else, it's hard to identify it...)
         QList<int> playersWithSameColor = m_playersColor.keys(m_playersColor[i]);
         if (playersWithSameColor.length() > 1) {
             QString incriminedPlayers = QString::number(i+1);
 
             for (int j = 0; j < playersWithSameColor.length(); j++) {
-                if (m_playersType[playersWithSameColor.at(j)]->currentText() != tr("None")
+                if (m_playersType.value(playersWithSameColor.at(j))->currentIndex() != PLAYER_IS_NONE
                     && playersWithSameColor.at(j) != i) {
                     incriminedPlayers += tr(" and %1").arg(playersWithSameColor.at(j)+1);
                 }
@@ -249,15 +269,36 @@ void MultiplayerUI::startGame() {
         }
     }
 
+    // Check the minimum player requirement is met
     if (nonePlayers > (PLAYER_NUMBER - PLAYER_NUMBER_MIN))
         errorMsg = tr("You need at least %1 to play the game").arg(PLAYER_NUMBER_MIN);
 
+    // Display an error if any one else launch the game
     if (errorMsg.length() > 0) {
         QMessageBox::warning(this, tr("Bomberman game error"), errorMsg);
     }
     else {
-        qDebug() << "Launching game";
+        // Draw the game field and switch to this layout
+        GameUI* gameUI = qobject_cast<GameUI *>(m_parent);
+        
+        Gamefield* gamefield = qobject_cast<Gamefield *>(gameUI->getLayout("gamefield"));
+        gamefield->setMap(m_mapList.value(m_selectedMap));
+        gamefield->setPlayersList(playerList);
+        gamefield->setGameRounds(m_gameRounds->value());
+        gamefield->drawMap();
+
+        StartUI* startUI = qobject_cast<StartUI *>(gameUI->getLayout("start"));
+        startUI->displayLayout("gamefield");
     }
+}
+
+/*! Set the selected map in the combo box
+ *
+ *  @param index The index of the selected map.
+ */
+void MultiplayerUI::selectMap(int index) {
+    qDebug() << "selec" << index;
+    m_selectedMap = index;
 }
 
 /*! Define the title of the layout

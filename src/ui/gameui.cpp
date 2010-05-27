@@ -2,6 +2,7 @@
 
 #include "ui/startui.h"
 #include "ui/multiplayerui.h"
+#include "ui/gamefield.h"
 
 GameUI::GameUI() {
     m_layoutStack = new QStackedLayout;
@@ -16,6 +17,11 @@ GameUI::GameUI() {
     MultiplayerUI* multiLayout = new MultiplayerUI(this);
     m_layoutList.insert("multiplayer", multiLayout);
     m_layoutStack->addWidget(multiLayout);
+
+    // Gamefield
+    Gamefield* gamefieldLayout = new Gamefield(this);
+    m_layoutList.insert("gamefield", gamefieldLayout);
+    m_layoutStack->addWidget(gamefieldLayout);
 
     // Set the window as a main window to avoid problems on Windows and Mac.
     setWindowFlags(Qt::Window);
