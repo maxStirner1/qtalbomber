@@ -3,6 +3,8 @@
 #include "ui/startui.h"
 
 MultiplayerUI::MultiplayerUI(QWidget* parent) : m_parent(parent) {
+    // TODO: disable field when player is none (or a bot)
+    // TODO: save players settings
     QVBoxLayout* mainLayout = new QVBoxLayout;
     QHBoxLayout* playersLayout = new QHBoxLayout;
     setDefaultKeys();
@@ -11,7 +13,7 @@ MultiplayerUI::MultiplayerUI(QWidget* parent) : m_parent(parent) {
      * Create player settings UI
      */
     for (int currentPlayer = 0; currentPlayer < PLAYER_NUMBER; currentPlayer++) {
-        QGroupBox* playerGroup = new QGroupBox;
+        QGroupBox* playerGroup = new QGroupBox(tr("Player %1").arg(currentPlayer+1));
         QFormLayout* playerOption = new QFormLayout;
         playerOption->setRowWrapPolicy(QFormLayout::WrapLongRows);
 
@@ -70,6 +72,7 @@ MultiplayerUI::MultiplayerUI(QWidget* parent) : m_parent(parent) {
     m_gameRounds = new QSpinBox;
     m_gameRounds->setMaximum(10);
     m_gameRounds->setMinimum(1);
+    m_gameRounds->setValue(3);
     gameLayout->addWidget(m_gameRounds, 0, 1, Qt::AlignLeft);
 
     // Map selection and informations
@@ -87,6 +90,7 @@ MultiplayerUI::MultiplayerUI(QWidget* parent) : m_parent(parent) {
     gameLayout->addWidget(backButton, 1, 2, Qt::AlignRight);
 
     QObject::connect(backButton, SIGNAL(clicked()), this, SLOT(displayStartUI()));
+    QObject::connect(playButton, SIGNAL(clicked()), this, SLOT(startGame()));
 
     gameGroupbox->setLayout(gameLayout);
     mainLayout->addWidget(gameGroupbox);
@@ -205,6 +209,54 @@ void MultiplayerUI::loadMaps() {
 
         m_mapComboBox->addItem(gameMap->mapName());
         m_mapList[m_mapComboBox->currentIndex()] = gameMap;
+    }
+}
+
+/*! Do some check and start the game.
+ * 
+ *  Each player have to chose a differents color but pseudo can be the same. 
+ */
+void MultiplayerUI::startGame() {
+    QString errorMsg = "";
+    int nonePlayers = 0;
+
+    for (int i = 0; i < PLAYER_NUMBER; i++) {
+        if (m_playersType[i]->currentText() == tr("None")) {
+            nonePlayers++;
+            continue;
+        }
+        
+        if (m_playersPseudo[i]->text().trimmed().length() < 3) {
+            errorMsg = tr("Pseudo for player %1 must be at least 3 character long").arg(i+1);
+            break;
+        }
+
+        QList<int> playersWithSameColor = m_playersColor.keys(m_playersColor[i]);
+        if (playersWithSameColor.length() > 1) {
+            QString incriminedPlayers = QString::number(i+1);
+
+            for (int j = 0; j < playersWithSameColor.length(); j++) {
+                if (m_playersType[playersWithSameColor.at(j)]->currentText() != tr("None")
+                    && playersWithSameColor.at(j) != i) {
+                    incriminedPlayers += tr(" and %1").arg(playersWithSameColor.at(j)+1);
+                }
+            }
+
+            if (incriminedPlayers.length() > 1) {
+                errorMsg = tr("Player %1 have the same color").arg(incriminedPlayers);
+                break;
+            }
+        }
+    }
+
+    if (nonePlayers > (PLAYER_NUMBER - PLAYER_NUMBER_MIN))
+        errorMsg = tr("You need at least %1 to play the game").arg(PLAYER_NUMBER_MIN);
+
+    if (errorMsg.length() > 0) {
+        QMessageBox::warning(this, tr("Bomberman game error"), errorMsg);
+    }
+    else {
+        qDebug() << "Launching game";
     }
 }
 

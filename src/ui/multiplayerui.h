@@ -17,6 +17,7 @@
 #include <QtGui/QLineEdit>
 #include <QtGui/QLabel>
 #include <QtGui/QColorDialog>
+#include <QtGui/QMessageBox>
 #include "ui/baseui.h"
 #include "game/map.h"
 #include "qtalbomber.h"
@@ -36,6 +37,7 @@ public:
 private slots:
     void changePlayerColor();
     void displayStartUI();
+    void startGame();
 
 private:
     /// Pointer to the parent who created the instance

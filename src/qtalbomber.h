@@ -13,6 +13,9 @@
 /// Default player color. A Qt color constants
 #define PLAYER_DEFAULT_COLOR "#00FF00"
 
+/// Minimum number of player in the game
+#define PLAYER_NUMBER_MIN 2
+
 /// Directory of the maps
 #define MAPS_DIRECTORY "maps"
 
