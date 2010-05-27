@@ -1,15 +1,21 @@
 #include "ui/gameui.h"
+
 #include "ui/startui.h"
+#include "ui/multiplayerui.h"
 
 GameUI::GameUI() {
     m_layoutStack = new QStackedLayout;
+    setLayout(m_layoutStack);
 
-    // StartUI management
+    // Start UI
     StartUI* startLayout = new StartUI(this);
     m_layoutList.insert("start", startLayout);
     m_layoutStack->addWidget(startLayout);
 
-    setLayout(m_layoutStack);
+    // Multiplayer UI
+    MultiplayerUI* multiLayout = new MultiplayerUI(this);
+    m_layoutList.insert("multiplayer", multiLayout);
+    m_layoutStack->addWidget(multiLayout);
 
     // Set the window as a main window to avoid problems on Windows and Mac.
     setWindowFlags(Qt::Window);

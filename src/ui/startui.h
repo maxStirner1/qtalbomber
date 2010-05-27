@@ -1,4 +1,3 @@
-
 #ifndef _STARTUI_H
 #define	_STARTUI_H
 
@@ -6,7 +5,7 @@
 #include <QtGui/QPushButton>
 #include <QtGui/QLabel>
 #include <QtCore/QDir>
-#include "baseui.h"
+#include "ui/baseui.h"
 
 /*! Splash layout of the game
  *
@@ -23,8 +22,8 @@ public:
 signals:
     void displayUI(QString layoutName);
 
-private slots:
-    void displayLayout();
+public slots:
+    void displayLayout(QString layoutName = "");
 
 private:
     /// Main layout containing the buttons and the image

@@ -1,4 +1,3 @@
-
 #ifndef _GAMEUI_H
 #define	_GAMEUI_H
 
@@ -36,7 +35,6 @@ signals:
 public slots:
     void setVisibleUI(QString layoutName);
     void exitGame();
-
 
 private:
     /// Stack containing all the differents layout

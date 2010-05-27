@@ -1,4 +1,4 @@
-#include "startui.h"
+#include "ui/startui.h"
 
 /*! Create the differents buttons of the interface and set the splash image.
  *
@@ -47,15 +47,17 @@ QString StartUI::layoutTitle() {
 
 /*! Set the corresponding layout from the signal sender.
  *
- *  This slot is called when a button of the start interface is clicked.
- *  The method will try to determine the sender of the object and display the
- *  proper interface.
+ *  @param layoutName Name of the layout to display
+ *
+ *  If no layout name is defined, the method will try to determine the sender
+ *  of the signal and display the proper interface.
  *
  *  If no sender or no corresponding layout can be found, the method will do
  *  nothing.
  */
-void StartUI::displayLayout() {
-    QString layoutName = sender()->objectName();
+void StartUI::displayLayout(QString layoutName) {
+    if (layoutName.length() == 0)
+        layoutName = sender()->objectName();
 
     if (layoutName.length() != 0)
         emit displayUI(layoutName);

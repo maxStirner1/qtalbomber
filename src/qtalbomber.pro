@@ -6,9 +6,12 @@ QT += network xml xmlpatterns
 
 RESOURCES += qtalbomber.qrc
 
-HEADERS += ui/baseui.h \
+HEADERS += qtalbomber.h \
+           ui/baseui.h \
            ui/gameui.h \
-           ui/startui.h
+           ui/startui.h \
+           ui/multiplayerui.h
 SOURCES += main.cpp \
            ui/gameui.cpp \
-           ui/startui.cpp
+           ui/startui.cpp \
+           ui/multiplayerui.cpp
