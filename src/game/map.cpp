@@ -315,3 +315,35 @@ void Map::removeBonus(int position) {
     if (position < m_bonusPositions.length())
         m_bonusPositions.replace(position, 0);
 }
+
+/*! Getter for the map name
+ *
+ *  @return The map name
+ */
+QString Map::mapName() {
+    return m_mapName;
+}
+
+/*! Getter for the map author
+ *
+ *  @return The map author
+ */
+QString Map::mapAuthor() {
+    return m_mapAuthor;
+}
+
+/*! Getter for the map description
+ *
+ *  @return The map description
+ */
+QString Map::mapDescription() {
+    return m_mapDescription;
+}
+
+/*! Getter for the map validity
+ *
+ *  @return The validity of the map
+ */
+bool Map::isValid() {
+    return m_mapValid;
+}

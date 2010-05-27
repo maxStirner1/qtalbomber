@@ -4,6 +4,7 @@
 #include <QtCore/QObject>
 #include <QtCore/QMap>
 #include <QtCore/QList>
+#include <QtGui/QApplication>
 #include <QtGui/QColor>
 #include <QtGui/QPushButton>
 #include <QtGui/QComboBox>
@@ -17,6 +18,7 @@
 #include <QtGui/QLabel>
 #include <QtGui/QColorDialog>
 #include "ui/baseui.h"
+#include "game/map.h"
 #include "qtalbomber.h"
 
 #include <QtCore/QDebug>
@@ -54,7 +56,10 @@ private:
     QSpinBox* m_gameRounds;
     /// Combo box containing map list
     QComboBox* m_mapComboBox;
+    /// Instances of the availables maps
+    QMap<int, Map*> m_mapList;
 
+    void loadMaps();
     void setPlayerColor(int playerId, QColor color);
     QString layoutTitle();
     void setDefaultKeys();

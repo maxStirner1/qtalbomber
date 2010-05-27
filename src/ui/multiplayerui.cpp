@@ -92,6 +92,9 @@ MultiplayerUI::MultiplayerUI(QWidget* parent) : m_parent(parent) {
     mainLayout->addWidget(gameGroupbox);
 
     setLayout(mainLayout);
+
+    // Loads the maps
+    loadMaps();
 }
 
 /*! Display a color dialog to let user choose is player color
@@ -174,6 +177,31 @@ void MultiplayerUI::setDefaultKeys() {
 //    playerkeys4["right"] = Qt::Key_N;
 //    playerkeys4["drop"] = Qt::Key_H;
 //    m_playersKey.insert(3, playerkeys4);
+}
+
+void MultiplayerUI::loadMaps() {
+    QDir mapsDir;
+
+    if (!mapsDir.cd(QObject::tr("%1/%2").arg(QApplication::applicationDirPath()).arg(MAPS_DIRECTORY)))
+        return;
+
+    QStringList mapsExt("*.xml");
+    mapsDir.setFilter(QDir::Files);
+    mapsDir.setNameFilters(mapsExt);
+
+    QFileInfoList mapsList = mapsDir.entryInfoList();
+
+    foreach (QFileInfo mapInfo, mapsList) {
+        if (!mapInfo.isReadable())
+            continue;
+
+        Map* gameMap = new Map(mapInfo);
+        if (!gameMap->isValid())
+            continue;
+
+        m_mapComboBox->addItem(gameMap->mapName());
+        m_mapList[m_mapComboBox->currentIndex()] = gameMap;
+    }
 }
 
 /*! Define the title of the layout
