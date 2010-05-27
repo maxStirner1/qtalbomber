@@ -179,6 +179,10 @@ void MultiplayerUI::setDefaultKeys() {
 //    m_playersKey.insert(3, playerkeys4);
 }
 
+/*! Load and set map in the map list.
+ *
+ *  For each map XML file, an instance of the Map class is created.
+ */
 void MultiplayerUI::loadMaps() {
     QDir mapsDir;
 

@@ -16,5 +16,20 @@
 /// Directory of the maps
 #define MAPS_DIRECTORY "maps"
 
+/// Block width
+#define BLOCK_WIDTH 24
+
+/// Block height
+#define BLOCK_HEIGHT 24
+
+/// Space between blocks
+#define BLOCK_SPACING 4
+
+/// Player type
+#define PLAYER_IS_REAL 1
+#define PLAYER_IS_BOT 2
+// Used only with network
+#define PLAYER_IS_SELF 3
+
 #endif	/* _QTALBOMBER_H */
 

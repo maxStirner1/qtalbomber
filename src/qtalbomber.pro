@@ -11,10 +11,12 @@ HEADERS += qtalbomber.h \
            ui/gameui.h \
            ui/startui.h \
            ui/multiplayerui.h \
-           game/map.h
+           game/map.h \
+           game/player.h
 SOURCES += main.cpp \
            ui/gameui.cpp \
            ui/startui.cpp \
            ui/multiplayerui.cpp \
-           game/map.cpp
+           game/map.cpp \
+           game/player.cpp
 
