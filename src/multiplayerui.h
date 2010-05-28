@@ -21,7 +21,6 @@
 #include <QtGui/QColorDialog>
 #include <QtGui/QMessageBox>
 #include "baseui.h"
-#include "map.h"
 #include "qtalbomber.h"
 
 #include <QtCore/QDebug>
@@ -61,12 +60,9 @@ private:
     QSpinBox* m_gameRounds;
     /// Combo box containing map list
     QComboBox* m_mapComboBox;
-    /// Instances of the availables maps
-    QMap<int, GameMap*> m_mapList;
     /// Selected map
     int m_selectedMap;
 
-    void loadMaps();
     void setPlayerColor(int playerId, QColor color);
     QString layoutTitle();
     void setDefaultKeys();

@@ -4,9 +4,11 @@
 #include <QtCore/QObject>
 #include <QtCore/QString>
 #include <QtCore/QMap>
+#include <QtCore/QList>
 #include <QtGui/QStackedLayout>
 #include <QtCore/QCoreApplication>
 #include "baseui.h"
+#include "map.h"
 
 /*! Main window of the game
  *
@@ -24,6 +26,7 @@ class GameUI : public QWidget {
 public:
     GameUI();
     BaseUI* getLayout(QString layoutName);
+    QList<Map *> mapList();
 
 signals:
     /*! Signal emitted when want to quit the game. Catched by exitGame slot.
@@ -41,6 +44,10 @@ private:
     QStackedLayout* m_layoutStack;
     /// List of the differents instance of the user interface
     QMap<QString, BaseUI*> m_layoutList;
+    /// List of the availbale maps
+    QList<Map *> m_mapList;
+
+    void loadMaps();
 };
 
 #endif	/* _GAMEUI_H */

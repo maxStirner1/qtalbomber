@@ -1,6 +1,5 @@
 #include "multiplayerui.h"
 #include "gameui.h"
-#include "startui.h"
 #include "gamefield.h"
 #include "player.h"
 #include "multiplayerhandler.h"
@@ -89,6 +88,16 @@ MultiplayerUI::MultiplayerUI(QWidget* parent) : m_parent(parent) {
     QObject::connect(m_mapComboBox, SIGNAL(activated(int)), this,
         SLOT(selectMap(int)));
 
+    // Append map to combo box
+    GameUI* gameUI = qobject_cast<GameUI *>(m_parent);
+    qDebug() << gameUI->mapList();
+    for (int i=0; i < gameUI->mapList().count(); i++) {
+        m_mapComboBox->addItem(gameUI->mapList().at(i)->mapName());
+    }
+    if (m_mapComboBox->currentIndex() > 0)
+        m_selectedMap = 0;
+
+
     // Action buttons
     QPushButton* playButton = new QPushButton(tr("Play"));
     gameLayout->addWidget(playButton, 0, 1, 1, 2, Qt::AlignRight);
@@ -102,13 +111,6 @@ MultiplayerUI::MultiplayerUI(QWidget* parent) : m_parent(parent) {
     mainLayout->addWidget(gameGroupbox);
 
     setLayout(mainLayout);
-
-    // Loads the maps
-    loadMaps();
-
-    // Select by default the first map
-    if (m_mapList.count() > 0)
-        m_selectedMap = 0;
 }
 
 /*! Display a color dialog to let user choose is player color
@@ -150,9 +152,7 @@ void MultiplayerUI::setPlayerColor(int playerId, QColor color) {
 /*! Go back to the start interface
  */
 void MultiplayerUI::displayStartUI() {
-    GameUI* gameUI = qobject_cast<GameUI *>(m_parent);
-    StartUI* startUI = qobject_cast<StartUI *>(gameUI->getLayout("start"));
-    startUI->displayLayout("start");
+    qobject_cast<GameUI *>(m_parent)->setVisibleUI("start");
 }
 
 /*! Set the default key for the players
@@ -196,37 +196,6 @@ void MultiplayerUI::setDefaultKeys() {
             keyAssoc.insert(j, i.key());
             m_playersKey.insert(i.value().at(j), keyAssoc);
         }
-    }
-}
-
-/*! Load and set map in the map list.
- *
- *  For each map XML file, an instance of the Map class is created.
- */
-void MultiplayerUI::loadMaps() {
-    QDir mapsDir;
-
-    if (!mapsDir.cd(QObject::tr("%1/%2").arg(QApplication::applicationDirPath()).arg(MAPS_DIRECTORY)))
-        return;
-
-    // Maps must have an .xml extension
-    QStringList mapsExt("*.xml");
-    mapsDir.setFilter(QDir::Files);
-    mapsDir.setNameFilters(mapsExt);
-
-    QFileInfoList mapsList = mapsDir.entryInfoList();
-
-    foreach (QFileInfo mapInfo, mapsList) {
-        if (!mapInfo.isReadable())
-            continue;
-
-        // Discard the map if not valid
-        GameMap* gameMap = new GameMap(mapInfo);
-        if (!gameMap->isMapValid())
-            continue;
-
-        m_mapComboBox->addItem(gameMap->mapName());
-        m_mapList[m_mapList.count()] = gameMap;
     }
 }
 
@@ -294,15 +263,14 @@ void MultiplayerUI::startGame() {
 
         // Set gamefield informations
         Gamefield* gamefield = qobject_cast<Gamefield *>(gameUI->getLayout("gamefield"));
-        gamefield->setMap(m_mapList.value(m_selectedMap));
+        gamefield->setMap(qobject_cast<GameUI *>(m_parent)->mapList().at(m_selectedMap));
         gamefield->setPlayersList(playerList);
         gamefield->setGameRounds(m_gameRounds->value());
         gamefield->setEventHandler(eventHandler);
         gamefield->drawMap();
 
         // Show the gamefield
-        StartUI* startUI = qobject_cast<StartUI *>(gameUI->getLayout("start"));
-        startUI->displayLayout("gamefield");
+        gameUI->setVisibleUI("gamefield");
     }
 }
 
@@ -311,7 +279,6 @@ void MultiplayerUI::startGame() {
  *  @param index The index of the selected map.
  */
 void MultiplayerUI::selectMap(int index) {
-    qDebug() << "selec" << index;
     m_selectedMap = index;
 }
 

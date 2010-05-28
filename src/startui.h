@@ -19,13 +19,12 @@ public:
     StartUI(QWidget* parent = 0);
     QString layoutTitle();
 
-signals:
-    void displayUI(QString layoutName);
-
 public slots:
     void displayLayout(QString layoutName = "");
 
 private:
+    /// Parent of the class
+    QWidget* m_parent;
     /// Main layout containing the buttons and the image
     QGridLayout* m_startPanel;
     /// Multiplayer game button

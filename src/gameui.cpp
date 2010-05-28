@@ -7,6 +7,9 @@ GameUI::GameUI() {
     m_layoutStack = new QStackedLayout;
     setLayout(m_layoutStack);
 
+    // Load the game map
+    loadMaps();
+
     // Start UI
     StartUI* startLayout = new StartUI(this);
     m_layoutList.insert("start", startLayout);
@@ -29,7 +32,6 @@ GameUI::GameUI() {
     // Qt resource system is used for the window icon
     setWindowIcon(QIcon(":/qtal-icon"));
 
-    connect(startLayout, SIGNAL(displayUI(QString)), this, SLOT(setVisibleUI(QString)));
     connect(this, SIGNAL(quitGame()), qApp, SLOT(quit()));
 }
 
@@ -49,6 +51,49 @@ void GameUI::setVisibleUI(QString layoutName) {
     setWindowTitle(currentWidget->layoutTitle());
     m_layoutStack->setCurrentWidget(currentWidget);
 }
+
+/*! Load and set map in the map list.
+ *
+ *  For each map XML file, an instance of the Map class is created.
+ *
+ *  @see GameUI::mapList
+ */
+void GameUI::loadMaps() {
+    QDir mapsDir;
+
+    if (!mapsDir.cd(QObject::tr("%1/%2").arg(QApplication::applicationDirPath()).arg(MAPS_DIRECTORY)))
+        return;
+
+    // Maps must have an .xml extension
+    QStringList mapsExt("*.xml");
+    mapsDir.setFilter(QDir::Files);
+    mapsDir.setNameFilters(mapsExt);
+
+    QFileInfoList mapsList = mapsDir.entryInfoList();
+
+    foreach (QFileInfo mapInfo, mapsList) {
+        if (!mapInfo.isReadable())
+            continue;
+
+        // Discard the map if not valid
+        Map* gameMap = new Map(mapInfo);
+        if (!gameMap->isMapValid())
+            continue;
+
+        m_mapList.append(gameMap);
+    }
+}
+
+/*! Available map of the game
+ *
+ *  @return List of the map
+ *
+ *  @see GameUI::loadMaps
+ */
+QList<Map *> GameUI::mapList() {
+    return m_mapList;
+}
+
 
 /*! Return a defined layout
  *

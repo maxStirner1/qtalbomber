@@ -176,7 +176,7 @@ void Gamefield::keyPressEvent(QKeyEvent* event) {
  *
  *  @see Gamefield::gameMap
  */
-void Gamefield::setMap(GameMap* map) {
+void Gamefield::setMap(Map* map) {
     m_map = map;
 }
 
@@ -186,7 +186,7 @@ void Gamefield::setMap(GameMap* map) {
  *
  *  @see Gamefield::setMap
  */
-GameMap* Gamefield::gameMap() {
+Map* Gamefield::gameMap() {
     return m_map;
 }
 

@@ -1,4 +1,5 @@
 #include "startui.h"
+#include "gameui.h"
 
 /*! Create the differents buttons of the interface and set the splash image.
  *
@@ -7,7 +8,7 @@
  *  As the Qt resource system enable it, the splash is stored as binary in the
  *  program to avoid path problems on the differents platforms.
  */
-StartUI::StartUI(QWidget* parent) {
+StartUI::StartUI(QWidget* parent) : m_parent(parent) {
     // Layout initialization
     m_startPanel = new QGridLayout;
     setLayout(m_startPanel);
@@ -59,6 +60,5 @@ void StartUI::displayLayout(QString layoutName) {
     if (layoutName.length() == 0)
         layoutName = sender()->objectName();
 
-    if (layoutName.length() != 0)
-        emit displayUI(layoutName);
+    qobject_cast<GameUI *>(m_parent)->setVisibleUI(layoutName);
 }

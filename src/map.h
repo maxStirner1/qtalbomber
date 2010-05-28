@@ -20,9 +20,11 @@
  *
  *  If the XML file of a map is invalid the map won't be available for playing.
  */
-class GameMap : public QObject {
+class Map : public QObject {
+    Q_OBJECT
+    
 public:
-    GameMap(QFileInfo mapFile, QObject* parent = 0);
+    Map(QFileInfo mapFile, QObject* parent = 0);
     bool isMapValid();
     QString mapName();
     QString mapAuthor();
