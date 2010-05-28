@@ -10,7 +10,7 @@
 
 #include <QtGui/QApplication>
 #include <QtCore/QTime>
-#include "ui/gameui.h"
+#include "gameui.h"
 
 /*! Start point of the application.
  * @param argc Number of argument passed to the program.
