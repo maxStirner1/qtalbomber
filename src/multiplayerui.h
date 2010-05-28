@@ -62,7 +62,7 @@ private:
     /// Combo box containing map list
     QComboBox* m_mapComboBox;
     /// Instances of the availables maps
-    QMap<int, Map*> m_mapList;
+    QMap<int, GameMap*> m_mapList;
     /// Selected map
     int m_selectedMap;
 

@@ -221,7 +221,7 @@ void MultiplayerUI::loadMaps() {
             continue;
 
         // Discard the map if not valid
-        Map* gameMap = new Map(mapInfo);
+        GameMap* gameMap = new GameMap(mapInfo);
         if (!gameMap->isMapValid())
             continue;
 

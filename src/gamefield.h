@@ -35,8 +35,8 @@ public:
     EventHandler* eventHandler();
     void setGameRounds(int rounds);
     int gameRounds();
-    void setMap(Map* map);
-    Map* gameMap();
+    void setMap(GameMap* map);
+    GameMap* gameMap();
     void drawMap();
 
 signals:
@@ -48,7 +48,7 @@ private slots:
 
 private:
     /// Map of the gamefield
-    Map* m_map;
+    GameMap* m_map;
     /// List of the differents player
     QMap<int, Player *> m_playersList;
     /// Number of rounds of the game
