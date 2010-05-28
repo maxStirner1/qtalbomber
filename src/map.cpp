@@ -341,6 +341,6 @@ QString Map::mapDescription() {
  *
  *  @return The validity of the map
  */
-bool Map::isValid() {
+bool Map::isMapValid() {
     return m_mapValid;
 }

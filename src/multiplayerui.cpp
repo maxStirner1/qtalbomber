@@ -222,7 +222,7 @@ void MultiplayerUI::loadMaps() {
 
         // Discard the map if not valid
         Map* gameMap = new Map(mapInfo);
-        if (!gameMap->isValid())
+        if (!gameMap->isMapValid())
             continue;
 
         m_mapComboBox->addItem(gameMap->mapName());

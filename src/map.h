@@ -23,7 +23,7 @@
 class Map : public QObject {
 public:
     Map(QFileInfo mapFile, QObject* parent = 0);
-    bool isValid();
+    bool isMapValid();
     QString mapName();
     QString mapAuthor();
     QString mapDescription();
