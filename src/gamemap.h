@@ -1,6 +1,7 @@
 #ifndef _MAP_H
 #define	_MAP_H
 
+#include "qtalbomber.h"
 #include <QtCore/QString>
 #include <QtCore/QList>
 #include <QtCore/QFileInfo>
@@ -8,7 +9,6 @@
 #include <QtGui/QApplication>
 #include <QtXml/QtXml>
 #include <QtXmlPatterns/QtXmlPatterns>
-#include "qtalbomber.h"
 
 /*! Define a map and his properties
  *
@@ -20,11 +20,11 @@
  *
  *  If the XML file of a map is invalid the map won't be available for playing.
  */
-class Map : public QObject {
+class GameMap : public QObject {
     Q_OBJECT
     
 public:
-    Map(QFileInfo mapFile, QObject* parent = 0);
+    GameMap(QFileInfo mapFile, QObject* parent = 0);
     bool isMapValid();
     QString mapName();
     QString mapAuthor();
@@ -36,7 +36,6 @@ public:
     void setPlayerPosition(int player, int position);
     void setPlayerPosition(int player, int widthPos, int heightPos);
     QList<int> collisionsTab();
-    void setCollisionsTab(QList<int> collisionsTab);
     void setCollisionsTab(int position, int value);
     QList<int> unbreakableBlocks();
     QList<int> breakableBlocks();

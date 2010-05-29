@@ -1,26 +1,19 @@
-
 #ifndef _PLAYER_H
 #define	_PLAYER_H
 
-#include <QtGui/QGraphicsEllipseItem>
-#include <QtCore/QString>
-#include <QtGui/QColor>
-#include <QtGui/QBrush>
-#include <QtGui/QLinearGradient>
 #include "qtalbomber.h"
+#include <QGraphicsEllipseItem>
+#include <QString>
+#include <QColor>
+#include <QBrush>
+#include <QLinearGradient>
 
 class Player : public QGraphicsEllipseItem {
 public:
-    Player();
-    Player(QString pseudo, QColor color, int type);
-    void setPlayerPseudo(QString pseudo);
-    QString playerPseudo();
-    void setPlayerColor(QColor color);
-    QColor playerColor();
-    void playerAlive(int alive);
-    bool isAlive();
-    void setPlayerType(int type);
-    int playerType();
+    Player(int playerId);
+    int playerId();
+    void setPlayerStatus(int status);
+    int playerStatus();
     void setBombCapacity(int capacity);
     int bombCapacity();
     void togglePlayerKick();
@@ -29,15 +22,11 @@ public:
     int playerLifes();
 
 private:
-    /// Player pseudo
-    QString m_playerPseudo;
+    /// Identifier of the player
+    int m_playerId;
     /// Player status
-    int m_playerAlive;
-    /// Player type (real, bot)
-    int m_playerType;
-    /// Player color
-    QColor m_playerColor;
-    /// Number of bomb which can be dropped by the user
+    int m_playerStatus;
+    /// Number of bomb which can be dropped
     int m_bombCapacity;
     /// Bombs range
     int m_bombRange;
@@ -47,9 +36,6 @@ private:
     int m_playerLifes;
 
     void initPlayer();
-    int heightFromPos(int pos);
-    int widthFromPos(int pos);
 };
 
 #endif	/* _PLAYER_H */
-

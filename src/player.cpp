@@ -1,120 +1,54 @@
 #include "player.h"
 
-Player::Player() {
-    initPlayer();
-}
-
-Player::Player(QString pseudo, QColor color, int type) {
-    m_playerPseudo = pseudo;
-    m_playerType = type;
-    setPlayerColor(color);
-    initPlayer();
-}
-
-
-/*! Initialize player attributes.
+/*! Create a new player and initialize his attributes.
  *
- *  Set the default value for the bonus and set set the size of the graphics item.
+ *  @param playerId Identifier of the player
  */
-void Player::initPlayer() {
+Player::Player(int playerId) {
     setRect(0, 0, BLOCK_WIDTH, BLOCK_HEIGHT);
+    setVisible(false);
+    m_playerId = playerId;
     m_playerKick = false;
-    m_playerAlive = true;
+    m_playerStatus = PLAYER_NONE;
     m_bombCapacity = 1;
     m_bombRange = 3;
 }
 
-/*! Setter for the player color.
+/*! Identifier of the player
  *
- *  @param color Color of the player.
- *
- *  This method also set a linear gradient and set it in the graphic item brush.
- *
- *  @see Player::playerColor
+ *  @return Player identifier
  */
-void Player::setPlayerColor(QColor color) {
-    QLinearGradient gradient(0, 0, BLOCK_WIDTH, BLOCK_HEIGHT);
-    gradient.setColorAt(0, QColor::fromRgb(color.red()/2, color.green()/2, color.blue()/2));
-    gradient.setColorAt(1, QColor::fromRgb(color.red(), color.green(), color.blue()));
-    setBrush(QBrush(gradient));
-    m_playerColor = color;
-}
-
-/*! Getter for the player color.
- *
- *  @return The player color.
- *
- *  @see Player::setPlayerColor
- */
-QColor Player::playerColor() {
-    return m_playerColor;
-}
-
-/*! Set the player type.
- *
- *  @param type Type of the player
- *
- *  The type of the playe define which kind of player it is (bot, real, ...).
- *  The value of the type is not verify.
- *
- *  @see Player::playerType
- */
-void Player::setPlayerType(int type) {
-    m_playerType = type;
-}
-
-/*! Player type getter.
- *
- *  @return The type of the player.
- *
- *  @see Player::setPlayerType
- */
-int Player::playerType() {
-    return m_playerType;
+int Player::playerId() {
+    return m_playerId;
 }
 
 /*! Set the state of the player
  *
- *  @param alive Player alive or not.
+ *  Status significations:
+ *   - -1: Player is none (not in game)
+ *   -  0: Player is dead
+ *   -  1: Player is alive
+ *   - >1: Player is god (can't died)
  *
- *  If the value is 0, player is dead.
- *  The player is alive with a value of 1.
- *  The god mode can be set with a value > 1
+ *  @param status Player status
  *
- *  @see Player::isAlive
+ *  @see Player::playerStatus
  */
-void Player::playerAlive(int alive) {
-    m_playerAlive = alive;
+void Player::setPlayerStatus(int status) {
+    m_playerStatus = status;
+
+    if (m_playerStatus >= 0)
+        setVisible(true);
 }
 
 /*! Status of the player.
  *
- *  @return If the player is alive or not/
+ *  @return PlayerState
  *
- *  @see Player::playerAlive
+ *  @see Player::setPlayerStatus
  */
-bool Player::isAlive() {
-    return m_playerAlive > 0;
-}
-
-/*! Set the player pseudo
- *
- *  @param pseudo Player pseudo
- *
- *  @see Player::playerPseudo
- */
-void Player::setPlayerPseudo(QString pseudo) {
-    m_playerPseudo = pseudo;
-}
-
-/*! Getter of the player pseudo
- *
- *  @return Player pseudo
- *
- *  @see Player::setPlayerPseudo
- */
-QString Player::playerPseudo() {
-    return m_playerPseudo;
+int Player::playerStatus() {
+    return m_playerStatus;
 }
 
 /*! Bomb capacity setter.

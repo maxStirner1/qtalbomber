@@ -8,9 +8,9 @@
  *  @author Lucas Courot
  */
 
+#include "gamefield.h"
 #include <QtGui/QApplication>
 #include <QtCore/QTime>
-#include "gameui.h"
 
 /*! Start point of the application.
  * @param argc Number of argument passed to the program.
@@ -23,7 +23,7 @@ int main(int argc, char *argv[]) {
     QApplication app(argc, argv);
     qsrand(QTime(0,0,0).secsTo(QTime::currentTime()));
 
-    GameUI ui;
+    Gamefield ui;
     ui.show();
 
     return app.exec();

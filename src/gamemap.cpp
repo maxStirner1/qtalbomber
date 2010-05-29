@@ -1,6 +1,7 @@
-#include "map.h"
+#include "gamemap.h"
 
-Map::Map(QFileInfo mapFile, QObject* parent) : m_mapInfo(mapFile) {
+GameMap::GameMap(QFileInfo mapFile, QObject* parent)
+    : QObject(parent), m_mapInfo(mapFile) {
      m_mapValid = false;
 
     if (!m_mapInfo.isFile())
@@ -70,7 +71,7 @@ Map::Map(QFileInfo mapFile, QObject* parent) : m_mapInfo(mapFile) {
  *  be sure all the row have the same length.
  *  If not the case the map is marked as invalid.
  */
-void Map::cleanMapString() {
+void GameMap::cleanMapString() {
     QStringList lines = m_mapString.split('\n');
     // Remove all the space
     lines.replaceInStrings(QRegExp("\\s"), "");
@@ -95,7 +96,7 @@ void Map::cleanMapString() {
  *  When created, the global border of the map are not set because implied.
  *  Add it now and then update the new size and width.
  */
-void Map::appendBorders() {
+void GameMap::appendBorders() {
     // Append side border
     int lines = m_mapString.length()/m_mapWidth;
     for (int i = 0; i < lines; i++) {
@@ -127,7 +128,7 @@ void Map::appendBorders() {
  *
  *  Bonus are generate randomly.
  */
-void Map::parseMapString() {
+void GameMap::parseMapString() {
     // Append the border to the map
     appendBorders();
 
@@ -154,7 +155,9 @@ void Map::parseMapString() {
             m_bonusPositions.append(0);
         }
         else  if (m_mapString.at(i).isDigit()) {
-            m_collisionsTab.append(1);
+            // Don't set players in the collision tab now else if a player is
+            // not used can create conflict...
+            m_collisionsTab.append(0);
             m_unbreakablesBlocks.append(0);
             m_breakableBlocks.append(0);
             m_playersPositions.append(m_mapString.at(i).digitValue());
@@ -167,7 +170,7 @@ void Map::parseMapString() {
  * 
  *  @return The width of the map.
  */
-int Map::mapWidth() {
+int GameMap::mapWidth() {
     return m_mapWidth;
 }
 
@@ -175,7 +178,7 @@ int Map::mapWidth() {
  * 
  *  @return The height of the map.
  */
-int Map::mapHeigh() {
+int GameMap::mapHeigh() {
     return m_mapHeight;
 }
 
@@ -183,7 +186,7 @@ int Map::mapHeigh() {
  * 
  *  @return Collision table.
  */
-QList<int> Map::collisionsTab() {
+QList<int> GameMap::collisionsTab() {
     return m_collisionsTab;
 }
 
@@ -198,7 +201,7 @@ QList<int> Map::collisionsTab() {
  *
  *  @see Map::collisionTab
  */
-void Map::setCollisionsTab(int position, int value) {
+void GameMap::setCollisionsTab(int position, int value) {
     if (value < m_collisionsTab.length() && (value == 0 || value == 1))
         m_collisionsTab.replace(position, value);
 }
@@ -207,7 +210,7 @@ void Map::setCollisionsTab(int position, int value) {
  *
  *  @return Unbreakable blocks table.
  */
-QList<int> Map::unbreakableBlocks() {
+QList<int> GameMap::unbreakableBlocks() {
     return m_unbreakablesBlocks;
 }
 
@@ -217,7 +220,7 @@ QList<int> Map::unbreakableBlocks() {
  *
  *  @see Map::removeBreakableBlocks
  */
-QList<int> Map::breakableBlocks() {
+QList<int> GameMap::breakableBlocks() {
     return m_breakableBlocks;
 }
 
@@ -230,7 +233,7 @@ QList<int> Map::breakableBlocks() {
  *
  *  @see Map::breakablesBlocks
  */
-void Map::removeBreakablesBlocks(int position) {
+void GameMap::removeBreakablesBlocks(int position) {
     if (position < m_unbreakablesBlocks.length()
         && m_unbreakablesBlocks.at(position) == 1) {
         m_unbreakablesBlocks.replace(position, 0);
@@ -246,7 +249,7 @@ void Map::removeBreakablesBlocks(int position) {
  *
  *  @see Map::setPlayerPosition
  */
-QList<int> Map::playersPositions() {
+QList<int> GameMap::playersPositions() {
     return m_playersPositions;
 }
 
@@ -262,7 +265,7 @@ QList<int> Map::playersPositions() {
  *  @see Map::playerPosition
  *  @seee Map::setPlayerPosition(int player, int position)
  */
-void Map::setPlayerPosition(int player, int widthPos, int heightPos) {
+void GameMap::setPlayerPosition(int player, int widthPos, int heightPos) {
     setPlayerPosition(player, widthPos*heightPos);
 }
 
@@ -277,8 +280,8 @@ void Map::setPlayerPosition(int player, int widthPos, int heightPos) {
  *
  *  @see Map::playerPosition
  */
-void Map::setPlayerPosition(int player, int position) {
-    if (player > PLAYER_NUMBER || position > m_playersPositions.length())
+void GameMap::setPlayerPosition(int player, int position) {
+    if (player > PLAYER_NUMBER_MAX || position > m_playersPositions.length())
         return;
    
     if (m_playersPositions.at(position) > 0)
@@ -300,7 +303,7 @@ void Map::setPlayerPosition(int player, int position) {
  *
  *  @see Map::removeBonus
  */
-QList<int> Map::bonusPositions() {
+QList<int> GameMap::bonusPositions() {
     return m_bonusPositions;
 }
 
@@ -308,7 +311,7 @@ QList<int> Map::bonusPositions() {
  *
  *  @param position Position of the bonus to remove.
  */
-void Map::removeBonus(int position) {
+void GameMap::removeBonus(int position) {
     if (position < m_bonusPositions.length())
         m_bonusPositions.replace(position, 0);
 }
@@ -317,7 +320,7 @@ void Map::removeBonus(int position) {
  *
  *  @return The map name
  */
-QString Map::mapName() {
+QString GameMap::mapName() {
     return m_mapName;
 }
 
@@ -325,7 +328,7 @@ QString Map::mapName() {
  *
  *  @return The map author
  */
-QString Map::mapAuthor() {
+QString GameMap::mapAuthor() {
     return m_mapAuthor;
 }
 
@@ -333,7 +336,7 @@ QString Map::mapAuthor() {
  *
  *  @return The map description
  */
-QString Map::mapDescription() {
+QString GameMap::mapDescription() {
     return m_mapDescription;
 }
 
@@ -341,6 +344,6 @@ QString Map::mapDescription() {
  *
  *  @return The validity of the map
  */
-bool Map::isMapValid() {
+bool GameMap::isMapValid() {
     return m_mapValid;
 }

@@ -3,7 +3,9 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://www.bombermanproject.com qtalbomber.xsd">
   <map>
-    _______________
+    ______4________
+    _#_#_#_#_#_#_#_
+    ______12_______
     _#_#_#_#_#_#_#_
     _______________
     _#_#_#_#_#_#_#_
@@ -14,9 +16,7 @@
     _______________
     _#_#_#_#_#_#_#_
     _______________
-    _#_#_#_#_#_#_#_
-    _______________
-    _#_#_#_#_#_#_#_
+    _#_#_3_#_#_#_#_
     _______________
   </map>
   <name>Very long map with a very long name and a very very very very
