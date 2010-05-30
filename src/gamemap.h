@@ -25,21 +25,24 @@ class GameMap : public QObject {
     
 public:
     GameMap(QFileInfo mapFile, QObject* parent = 0);
-    bool isMapValid();
-    QString mapName();
-    QString mapAuthor();
-    QString mapDescription();
-    void parseMapString();
-    int mapWidth();
-    int mapHeigh();
+    bool isValid();
+    QString name();
+    QString author();
+    QString description();
+    void parseMapRepr();
+    int width();
+    int heigh();
     QList<int> playersPositions();
     void setPlayerPosition(int player, int position);
     void setPlayerPosition(int player, int widthPos, int heightPos);
+    void removePlayer(int player);
     QList<int> collisionsTab();
-    void setCollisionsTab(int position, int value);
+    void setCollision(int position, int value);
+    void addCollision(int position);
+    void removeCollision(int position);
     QList<int> unbreakableBlocks();
     QList<int> breakableBlocks();
-    void removeBreakablesBlocks(int position);
+    void removeBreakableBlock(int position);
     QList<int> bonusPositions();
     void removeBonus(int position);
 
@@ -47,7 +50,7 @@ private:
     /// Map file informations
     QFileInfo m_mapInfo;
     /// Holds string representation of the map
-    QString m_mapString;
+    QString m_mapRepr;
     /// Height of the map
     int m_mapHeight;
     /// Width of the map
@@ -55,23 +58,23 @@ private:
     /// Store if the map is valid and can be used
     bool m_mapValid;
     /// Auhtor of the map
-    QString m_mapAuthor;
+    QString m_author;
     /// Name of the map
-    QString m_mapName;
+    QString m_name;
     /// Description of the map
-    QString m_mapDescription;
+    QString m_description;
     /// Store where collision can occure between elements of the game
-    QList<int> m_collisionsTab;
+    QList<int> m_collisions;
     /// Define where unbreakables blocks are
     QList<int> m_unbreakablesBlocks;
     /// Defines where breakables blocks are
     QList<int> m_breakableBlocks;
     /// Defines the bonus position
-    QList<int> m_bonusPositions;
+    QList<int> m_bonus;
     /// Store the player position
-    QList<int> m_playersPositions;
+    QList<int> m_players;
 
-    void cleanMapString();
+    void cleanMapRepr();
     void appendBorders();
 };
 

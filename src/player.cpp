@@ -5,13 +5,13 @@
  *  @param playerId Identifier of the player
  */
 Player::Player(int playerId) {
-    setRect(0, 0, BLOCK_WIDTH, BLOCK_HEIGHT);
+    setRect(0, 0, MAP_BLOCK_WIDTH, MAP_BLOCK_HEIGHT);
     setVisible(false);
     m_playerId = playerId;
-    m_playerKick = false;
-    m_playerStatus = PLAYER_NONE;
+    m_kickBonus = false;
+    m_status = PLAYER_OFF;
     m_bombCapacity = 1;
-    m_bombRange = 3;
+    m_bombsRange = 3;
 }
 
 /*! Identifier of the player
@@ -34,11 +34,13 @@ int Player::playerId() {
  *
  *  @see Player::playerStatus
  */
-void Player::setPlayerStatus(int status) {
-    m_playerStatus = status;
+void Player::setState(int status) {
+    m_status = status;
 
-    if (m_playerStatus >= 0)
+    if (m_status >= 0)
         setVisible(true);
+    else
+        setVisible(false);
 }
 
 /*! Status of the player.
@@ -47,8 +49,8 @@ void Player::setPlayerStatus(int status) {
  *
  *  @see Player::setPlayerStatus
  */
-int Player::playerStatus() {
-    return m_playerStatus;
+int Player::state() {
+    return m_status;
 }
 
 /*! Bomb capacity setter.
@@ -77,8 +79,8 @@ int Player::bombCapacity() {
  *
  *  @see Player::hasKick
  */
-void Player::togglePlayerKick() {
-    m_playerKick = !m_playerKick;
+void Player::toggleKickBonus() {
+    m_kickBonus = !m_kickBonus;
 }
 
 /*! Kick bonus available for the player
@@ -88,7 +90,7 @@ void Player::togglePlayerKick() {
  *  @see Player::togglePlayerKick
  */
 bool Player::hasKick() {
-    return m_playerKick;
+    return m_kickBonus;
 }
 
 /*! Set the number of life of the player
@@ -97,8 +99,8 @@ bool Player::hasKick() {
  *
  *  @see Player::playerLifes
  */
-void Player::setPlayerLifes(int lifes) {
-    m_playerLifes = lifes;
+void Player::setLifes(int lifes) {
+    m_lifes = lifes;
 }
 
 /*! Number of life of a player
@@ -107,6 +109,22 @@ void Player::setPlayerLifes(int lifes) {
  *
  *  @see Player::setPlayerLifes
  */
-int Player::playerLifes() {
-    return m_playerLifes;
+int Player::lifes() {
+    return m_lifes;
+}
+
+/*! Range of the player bombs.
+ *
+ *  @return Player bomb range.
+ */
+int Player::bombsRange() {
+    return m_bombsRange;
+}
+
+/*! Set the player bomb range.
+ *
+ *  @param range Range of the bombs
+ */
+void Player::setBombsRange(int range) {
+    m_bombsRange = range;
 }

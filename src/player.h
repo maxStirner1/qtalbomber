@@ -12,30 +12,30 @@ class Player : public QGraphicsEllipseItem {
 public:
     Player(int playerId);
     int playerId();
-    void setPlayerStatus(int status);
-    int playerStatus();
+    void setState(int status);
+    int state();
     void setBombCapacity(int capacity);
     int bombCapacity();
-    void togglePlayerKick();
+    void toggleKickBonus();
     bool hasKick();
-    void setPlayerLifes(int lifes);
-    int playerLifes();
+    void setLifes(int lifes);
+    int lifes();
+    int bombsRange();
+    void setBombsRange(int range);
 
 private:
     /// Identifier of the player
     int m_playerId;
     /// Player status
-    int m_playerStatus;
+    int m_status;
     /// Number of bomb which can be dropped
     int m_bombCapacity;
     /// Bombs range
-    int m_bombRange;
+    int m_bombsRange;
     /// Kick bonus
-    bool m_playerKick;
+    bool m_kickBonus;
     /// Number of life of the player
-    int m_playerLifes;
-
-    void initPlayer();
+    int m_lifes;
 };
 
 #endif	/* _PLAYER_H */
