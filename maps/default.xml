@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<qtalmap xmlns="http://www.bombermanproject.com"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.bombermanproject.com qtalbomber.xsd">
+  <map>
+_______________
+_#_#_#_#_#_#_#_
+__1___bbb______
+_#_#_#_#_#_#b#_
+____#___#___b__
+_#_#_#_#_#_#b#_
+_2______b___b__
+_#_#_#_#_#_#_#_
+__#___b________
+_#_#_#_#_#_#_#_
+________b__#___
+_#_#_#_#_#_#_#_
+___b__#_____3__
+_#_#_#_#_#_#_#_
+______#__4_____
+</map>
+  <name>Default Map</name>
+  <author>Billy Bob</author>
+  <description>
+    Rah-rah-ah-ah-ah-ah!
+    Roma-roma-mamaa!
+    Ga-ga-ooh-la-la!
+  </description>
+</qtalmap>

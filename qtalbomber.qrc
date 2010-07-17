@@ -1,0 +1,66 @@
+<RCC>
+  <qresource prefix="/">
+    <file alias="player-off">Pixmap/bomberman-off.png</file>
+    <file alias="qtal-icon">Pixmap/qtalbomber.png</file>
+
+    <file alias="player-death-0-0">Pixmap/White/white2.png</file>
+    <file alias="player-death-0-1">Pixmap/White/white3.png</file>
+    <file alias="player-death-0-2">Pixmap/White/white4.png</file>
+    <file alias="player-death-0-3">Pixmap/White/white5.png</file>
+    <file alias="player-death-0-4">Pixmap/White/white6.png</file>
+    <file alias="player-death-0-5">Pixmap/White/white7.png</file>
+    <file alias="player-0-2-0">Pixmap/White/white1.png</file>
+    <file alias="player-0-2-1">Pixmap/White/white8.png</file>
+    <file alias="player-0-4-0">Pixmap/White/white9.png</file>
+    <file alias="player-0-4-1">Pixmap/White/white10.png</file>
+    <file alias="player-0-3-0">Pixmap/White/white13.png</file>
+    <file alias="player-0-3-1">Pixmap/White/white14.png</file>
+    <file alias="player-0-1-0">Pixmap/White/white15.png</file>
+    <file alias="player-0-1-1">Pixmap/White/white16.png</file>
+
+    <file alias="player-death-1-0">Pixmap/Blue/blue2.png</file>
+    <file alias="player-death-1-1">Pixmap/Blue/blue3.png</file>
+    <file alias="player-death-1-2">Pixmap/Blue/blue4.png</file>
+    <file alias="player-death-1-3">Pixmap/Blue/blue5.png</file>
+    <file alias="player-death-1-4">Pixmap/Blue/blue6.png</file>
+    <file alias="player-death-1-5">Pixmap/Blue/blue7.png</file>
+    <file alias="player-1-2-0">Pixmap/Blue/blue1.png</file>
+    <file alias="player-1-2-1">Pixmap/Blue/blue8.png</file>
+    <file alias="player-1-4-0">Pixmap/Blue/blue9.png</file>
+    <file alias="player-1-4-1">Pixmap/Blue/blue10.png</file>
+    <file alias="player-1-3-0">Pixmap/Blue/blue13.png</file>
+    <file alias="player-1-3-1">Pixmap/Blue/blue14.png</file>
+    <file alias="player-1-1-0">Pixmap/Blue/blue15.png</file>
+    <file alias="player-1-1-1">Pixmap/Blue/blue16.png</file>
+
+    <file alias="player-death-2-0">Pixmap/Pink/pink2.png</file>
+    <file alias="player-death-2-1">Pixmap/Pink/pink3.png</file>
+    <file alias="player-death-2-2">Pixmap/Pink/pink4.png</file>
+    <file alias="player-death-2-3">Pixmap/Pink/pink5.png</file>
+    <file alias="player-death-2-4">Pixmap/Pink/pink6.png</file>
+    <file alias="player-death-2-5">Pixmap/Pink/pink7.png</file>
+    <file alias="player-2-2-0">Pixmap/Pink/pink1.png</file>
+    <file alias="player-2-2-1">Pixmap/Pink/pink8.png</file>
+    <file alias="player-2-4-0">Pixmap/Pink/pink9.png</file>
+    <file alias="player-2-4-1">Pixmap/Pink/pink10.png</file>
+    <file alias="player-2-3-0">Pixmap/Pink/pink13.png</file>
+    <file alias="player-2-3-1">Pixmap/Pink/pink14.png</file>
+    <file alias="player-2-1-0">Pixmap/Pink/pink15.png</file>
+    <file alias="player-2-1-1">Pixmap/Pink/pink16.png</file>
+
+    <file alias="player-death-3-0">Pixmap/Grey/grey2.png</file>
+    <file alias="player-death-3-1">Pixmap/Grey/grey3.png</file>
+    <file alias="player-death-3-2">Pixmap/Grey/grey4.png</file>
+    <file alias="player-death-3-3">Pixmap/Grey/grey5.png</file>
+    <file alias="player-death-3-4">Pixmap/Grey/grey6.png</file>
+    <file alias="player-death-3-5">Pixmap/Grey/grey7.png</file>
+    <file alias="player-3-2-0">Pixmap/Grey/grey1.png</file>
+    <file alias="player-3-2-1">Pixmap/Grey/grey8.png</file>
+    <file alias="player-3-4-0">Pixmap/Grey/grey9.png</file>
+    <file alias="player-3-4-1">Pixmap/Grey/grey10.png</file>
+    <file alias="player-3-3-0">Pixmap/Grey/grey13.png</file>
+    <file alias="player-3-3-1">Pixmap/Grey/grey14.png</file>
+    <file alias="player-3-1-0">Pixmap/Grey/grey15.png</file>
+    <file alias="player-3-1-1">Pixmap/Grey/grey16.png</file>
+  </qresource>
+</RCC>
