@@ -7,8 +7,8 @@
  *           Alexandre Joseph
  *           Lucas Courot
  *
- *  File:        main.cpp
- *  Description: Game launcher.
+ *  File:        AddServerDialog.h
+ *  Description: Header file for AddServerDialog class.
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -24,15 +24,32 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <QApplication>
-#include "ui/GameUI.h"
+#ifndef _ADDSERVERDIALOG_H
+#define	_ADDSERVERDIALOG_H
 
-int main(int argc, char *argv[]) {
-    QApplication app(argc, argv);
-    qsrand(QTime(0,0,0).secsTo(QTime::currentTime()));
+#include <QtGui>
 
-    GameUI ui;
-    ui.show();
+class AddServerDialog : public QDialog {
+    Q_OBJECT
 
-    return app.exec();
-}
+public:
+    AddServerDialog(QWidget* parent = 0);
+
+signals:
+    void serverAdded(QStringList);
+
+private slots:
+    void addServer();
+    void cancelAction();
+
+private:
+    QFormLayout* m_fieldLayout;
+    QGridLayout* m_mainLayout;
+    QLineEdit* m_serverAddress;
+    QSpinBox* m_serverPort;
+    QPushButton* m_addButton;
+    QPushButton* m_cancelButton;
+};
+
+#endif	/* _ADDSERVERDIALOG_H */
+

@@ -7,8 +7,8 @@
  *           Alexandre Joseph
  *           Lucas Courot
  *
- *  File:        main.cpp
- *  Description: Game launcher.
+ *  File:        GameUI.h
+ *  Description: Header file for GameUI class.
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -24,15 +24,48 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <QApplication>
-#include "ui/GameUI.h"
+#ifndef _GAMEUI_H
+#define	_GAMEUI_H
 
-int main(int argc, char *argv[]) {
-    QApplication app(argc, argv);
-    qsrand(QTime(0,0,0).secsTo(QTime::currentTime()));
+#include "constants.h"
+#include "ui/StartUI.h"
+#include "ui/ServerUI.h"
+#include "ui/GameFieldUI.h"
+#include "server/ConnectionHandler.h"
+#include <QtNetwork>
+#include <QtGui>
+#include <QDebug>
 
-    GameUI ui;
-    ui.show();
+class ClientUI;
 
-    return app.exec();
-}
+class GameUI : public QWidget {
+    Q_OBJECT
+    
+public:
+    GameUI();
+    StartUI* startUI();
+    ClientUI* clientUI();
+    ServerUI* serverUI();
+    GameFieldUI* gameFieldUI();
+
+
+signals:
+    void quitGame();
+
+public slots:
+    void displayStartUI();
+    void displayClientUI();
+    void displayServerUI();
+    void displayGameFieldUI();
+    void exitGame();
+
+private:
+    QStackedLayout* m_layoutStack;
+    StartUI* m_startUI;
+    ClientUI* m_clientUI;
+    ServerUI* m_serverUI;
+    GameFieldUI* m_gameFieldUI;
+};
+
+#endif	/* _GAMEUI_H */
+

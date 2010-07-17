@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RCC version="1.0">
+    <qresource>
+        <file alias="qtal-splash">media/bomberman.png</file>
+        <file alias="qtal-icon">media/bombericon.png</file>
+        <file alias="qtal-bot-1">media/qtal-bot-1.jpg</file>
+        <file alias="qtal-bot-2">media/qtal-bot-2.jpg</file>
+        <file alias="qtal-bot-3">media/qtal-bot-3.jpg</file>
+        <file alias="qtal-wait">media/qtal-wait.png</file>
+        <file alias="qtal-unknow">media/qtal-unknown.jpg</file>
+    </qresource>
+</RCC>

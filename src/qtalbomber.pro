@@ -1,27 +1,34 @@
 TEMPLATE = app
 TARGET = qtalbomber
-DEPENDPATH += . 
-INCLUDEPATH += . 
+DEPENDPATH += . client server ui
+INCLUDEPATH += . ui client server
 QT += network xml xmlpatterns
 
-RESOURCES += qtalbomber.qrc
+RESOURCES += qtalmedia.qrc
 
-HEADERS += qtalbomber.h \
-           baseui.h \
-           gameui.h \
-           startui.h \
-           multiplayerui.h \
-           gamefield.h \
-           map.h \
-           player.h \
-           eventhandler.h \
-           multiplayerhandler.h
+# Input
+HEADERS += constants.h \
+           client/AddServerDialog.h \
+           client/CommunicationHandler.h \
+           server/ConnectionHandler.h \
+           server/GameMap.h \
+           game/Map.h \
+           game/Player.h \
+           ui/ClientUI.h \
+           ui/GameUI.h \
+           ui/ServerUI.h \
+           ui/StartUI.h \
+           ui/GameFieldUI.h 
 SOURCES += main.cpp \
-           gameui.cpp \
-           startui.cpp \
-           multiplayerui.cpp \
-           gamefield.cpp \
-           map.cpp \
-           player.cpp \
-           multiplayerhandler.cpp
+           client/AddServerDialog.cpp \
+           client/CommunicationHandler.cpp \
+           server/ConnectionHandler.cpp \
+           server/GameMap.cpp \
+           game/Map.cpp \
+           game/Player.cpp \
+           ui/ClientUI.cpp \
+           ui/GameUI.cpp \
+           ui/ServerUI.cpp \
+           ui/StartUI.cpp \
+           ui/GameFieldUI.cpp
 

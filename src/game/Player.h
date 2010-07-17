@@ -7,8 +7,8 @@
  *           Alexandre Joseph
  *           Lucas Courot
  *
- *  File:        main.cpp
- *  Description: Game launcher.
+ *  File:        Player.h
+ *  Description: Header file for Player class.
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -24,15 +24,39 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <QApplication>
-#include "ui/GameUI.h"
 
-int main(int argc, char *argv[]) {
-    QApplication app(argc, argv);
-    qsrand(QTime(0,0,0).secsTo(QTime::currentTime()));
+#ifndef _PLAYER_H
+#define	_PLAYER_H
 
-    GameUI ui;
-    ui.show();
+#include "constants.h"
+#include <QtGui>
 
-    return app.exec();
-}
+class Player : public QGraphicsEllipseItem {
+
+public:
+    Player();
+    Player(QString pseudo, QColor color, QByteArray* avatar);
+    void setPlayerPseudo(QString pseudo);
+    void setPlayerColor(QColor color);
+    void setPlayerAvatar(QByteArray* avatar);
+    void setPlayerType(int type);
+    void setPlayerPosition(int position);
+    void setPlayerStatus(int status);
+    QString playerPseudo();
+    QColor playerColor();
+    QByteArray playerAvatar();
+    int playerType();
+    int playerPosition();
+    int playerStatus();
+
+private:
+    QString m_playerPseudo;
+    QColor m_playerColor;
+    QByteArray m_playerAvatar;
+    int m_playerType;
+    int m_playerPosition;
+    int m_playerStatus;
+};
+
+#endif	/* _PLAYER_H */
+

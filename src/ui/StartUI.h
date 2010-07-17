@@ -7,8 +7,8 @@
  *           Alexandre Joseph
  *           Lucas Courot
  *
- *  File:        main.cpp
- *  Description: Game launcher.
+ *  File:        StartUI.h
+ *  Description: Header file for StartUI class.
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -24,15 +24,28 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <QApplication>
-#include "ui/GameUI.h"
+#ifndef _STARTUI_H
+#define	_STARTUI_H
 
-int main(int argc, char *argv[]) {
-    QApplication app(argc, argv);
-    qsrand(QTime(0,0,0).secsTo(QTime::currentTime()));
+#include <QGridLayout>
+#include <QPushButton>
+#include <QLabel>
+#include <QDir>
 
-    GameUI ui;
-    ui.show();
+class StartUI : public QWidget {
+    Q_OBJECT
+    
+public:
+    StartUI(QWidget* parent = 0);
+    QString layoutTitle();
 
-    return app.exec();
-}
+private:
+    QGridLayout* m_startPanel;
+    QPushButton* m_playGameButton;
+    QPushButton* m_hostGameButton;
+    QPushButton* m_exitGameButton;
+    QLabel* m_gameSplash;
+};
+
+#endif	/* _STARTUI_H */
+

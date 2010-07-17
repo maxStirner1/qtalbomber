@@ -7,8 +7,8 @@
  *           Alexandre Joseph
  *           Lucas Courot
  *
- *  File:        main.cpp
- *  Description: Game launcher.
+ *  File:        GameMap.h
+ *  Description: Header file for GameMap class.
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -24,15 +24,37 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <QApplication>
-#include "ui/GameUI.h"
+#ifndef _GAMEMAP_H
+#define	_GAMEMAP_H
 
-int main(int argc, char *argv[]) {
-    QApplication app(argc, argv);
-    qsrand(QTime(0,0,0).secsTo(QTime::currentTime()));
+#include "../constants.h"
+#include <QtXml/QtXml>
+#include <QtXmlPatterns/QtXmlPatterns>
+#include <QDebug>
 
-    GameUI ui;
-    ui.show();
+class GameMap {
+public:
+    GameMap(QFileInfo mapFile);
+    bool isValid();
+    QString mapName();
+    QString mapAuthor();
+    QString mapDescription();
+    QString mapLocation();
+    QString mapContent();
+    int heigh();
+    int width();
 
-    return app.exec();
-}
+private:
+    void computeContent();
+    QFileInfo m_mapFile;
+    bool m_mapValid;
+    QString m_mapName;
+    QString m_mapAuthor;
+    QString m_mapDesc;
+    QString m_mapContent;
+    int m_mapHeight;
+    int m_mapWidth;
+};
+
+#endif	/* _GAMEMAP_H */
+
