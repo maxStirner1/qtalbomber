@@ -34,7 +34,7 @@
 #define GAME_FINISHED 3
 
 // Head up display time
-#define HUD_TIME 10O0
+#define HUD_TIME 1000
 
 // Bomb attributes
 #define BOMB_TIMER 3000
