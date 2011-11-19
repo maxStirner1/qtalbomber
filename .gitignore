@@ -1,0 +1,11 @@
+src/nbproject
+src/moc_*
+src/qtalbomber
+src/*.o
+src/Makefile*
+src/.dep.inc
+src/qrc_*
+src/ui_*.h
+src/*.qm
+.settings
+.project
