@@ -4,7 +4,7 @@
 
 #include <QDialog>
 #include <QTabWidget>
-#include <QTextEdit>
+#include <QLabel>
 #include <QGridLayout>
 
 class About : public QDialog {
