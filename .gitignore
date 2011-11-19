@@ -9,3 +9,9 @@ src/ui_*.h
 src/*.qm
 .settings
 .project
+*.swp
+*.aux
+*.log
+*.toc
+*.pdf
+*.out
