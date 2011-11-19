@@ -314,7 +314,6 @@ void GameField::dropBomb(Player* player) {
         return;
 
     Bomb* bomb = new Bomb(player->playerID());
-    qDebug() << "Player number bomb :" << player->playerID();
     player->addCurrentBombCapacity();
     Flam* flamUp = new Flam(MOVE_UP, player->bombRange());
     Flam* flamDown = new Flam(MOVE_DOWN, player->bombRange());
@@ -352,7 +351,6 @@ void GameField::dropBomb(Player* player) {
 
     m_bombs.append(bomb);
     m_level.setCollision(indexFromCoord(bomb->x(), bomb->y()), 1);
-    qDebug() << "tabcollision :" << m_level.collisions().at(indexFromCoord(bomb->x(), bomb->y())) << "at" << indexFromCoord(bomb->x(), bomb->y());
     bomb->dropBomb();
 }
 
@@ -418,7 +416,6 @@ void GameField::collisionChecking() {
     Flam *flamCopy = qobject_cast<Flam*>(sender());
 
     if (!flamCopy) {
-        qDebug() << "hello";
         return;
     }
 
@@ -464,7 +461,6 @@ void GameField::collisionChecking() {
                 return;
 
             m_players.at(playerId)->removeLifes();
-            qDebug() << "PLAYER ID COLLIDE WITH BOMB :" << playerId;
             if (m_players.at(playerId)->lifes() < 1) {
                 setPlayerDead(playerId);
             }
@@ -563,25 +559,21 @@ void GameField::move(int direction, Player *item) {
             dx = 0;
             dy = -(BLOCK_SPACING + BLOCK_HEIGHT);
             item->setPix(MOVE_UP);
-            qDebug() << item->playerID() << "Up";
             break;
         case MOVE_DOWN:
             dx = 0;
             dy = (BLOCK_SPACING + BLOCK_HEIGHT);
             item->setPix(MOVE_DOWN);
-            qDebug() << item->playerID() << "Down";
             break;
         case MOVE_RIGHT:
             dx = (BLOCK_SPACING + BLOCK_WIDTH);
             dy = 0;
             item->setPix(MOVE_RIGHT);
-            qDebug() << item->playerID() << "Right";
             break;
         case MOVE_LEFT:
             dx = -(BLOCK_SPACING + BLOCK_WIDTH);
             dy = 0;
             item->setPix(MOVE_LEFT);
-            qDebug() << item->playerID() << "Left";
             break;
     }
 
@@ -595,7 +587,6 @@ void GameField::move(int direction, Player *item) {
         m_level.setPlayerPosition(i, item->playerID() + 1);
 
         if (m_level.bonuses().at(i) > 0) {
-            qDebug() << "Bonus taken!";
             for (int i = 0; i < m_bonuses.size(); i++) {
                 if (m_bonuses.at(i)->x() == item->x() && m_bonuses.at(i)->y() == item->y()) {
                     item->setPlayerAttributes(m_bonuses.at(i)->attributes());
@@ -680,7 +671,6 @@ int GameField::countDeadPlayer() {
  */
 void GameField::setPlayerDead(int playerId) {
     // Add player score
-    qDebug() << "player score" << m_playersScore.at(playerId);
     m_playersScore.replace(playerId, m_playersScore.at(playerId) + countDeadPlayer());
     m_players.at(playerId)->setPlayerAlive(false);
     //    m_scene->removeItem(m_players.at(playerId));
@@ -808,7 +798,6 @@ void GameField::manageRounds() {
     // If there is no more player, switch to the next round.
     if (m_playerInGame < 2) {
         m_currentRound++;
-        qDebug() << "round" << m_currentRound;
 
         int winner = -1;
         for (int i = 0; i < m_players.size(); i++) {

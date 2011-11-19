@@ -1,4 +1,3 @@
-
 #include "flam.h"
 
 /*!

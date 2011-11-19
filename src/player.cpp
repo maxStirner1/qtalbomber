@@ -76,14 +76,10 @@ void Player::setPlayerAttributes(QList<int> bonusAttributes) {
     }
     if (m_playerKick == false && bonusAttributes[KICK_ACTIVATOR] > 0) {
 	m_playerKick = true;
-	qDebug() << "Bomb kick upgraded :" << bonusAttributes[KICK_ACTIVATOR];
     }
     if (m_playerLifes < 3 && bonusAttributes[LIFE_UP] > 0) {
 	m_playerLifes += bonusAttributes[LIFE_UP];
-	qDebug() << "Life upgraded :" << bonusAttributes[LIFE_UP];
     }
-    qDebug() << "Player Stats list :";
-    qDebug() << "Capacity :" << m_bombCapacity << "Range :" << m_bombRange << "Life :" << m_playerLifes << "Kick :" << m_playerKick;
 }
 
 void Player::setStatus(int type) {

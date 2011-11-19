@@ -1,4 +1,3 @@
-
 #ifndef GAMEFIELD_H
 #define GAMEFIELD_H
 
