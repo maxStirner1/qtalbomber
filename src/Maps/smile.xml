@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<qtalmap xmlns="http://www.bombermanproject.com"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.bombermanproject.com qtalbomber.xsd">
+  <map>
+_______________
+__bbbbbbbbbbb__
+__b__bbbbb__b__
+__b_bbbbbbb_b__
+__bbbbbbbbbbbbb
+_4_b______b__3_
+__#__b#_b#_#___
+__#____#____#__
+__#__#bbb#__#__
+___#__###__#___
+____#_____#____
+__1__bbbb___2__
+__bbbbbbbbbbb__
+_bbb_bbbbb_bbb_
+bbb__bbbbb__bbb
+</map>
+  <name>Mister</name>
+  <author>John</author>
+  <description>
+  Hello mister
+  </description>
+</qtalmap>

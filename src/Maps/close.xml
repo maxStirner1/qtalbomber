@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<qtalmap xmlns="http://www.bombermanproject.com"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.bombermanproject.com qtalbomber.xsd">
+  <map>
+_#_____#_____#_
+__#____b____#__
+__b#___b___#b__
+#___b#####b__#_
+___b_______b___
+__#_bbbbbb__#__
+_#_b__12__b__#_
+b_b___34___b__b
+#_##bbbbbb##__#
+#_____________#
+bbb##bbbbb##bbb
+____b_____b____
+__b_#_____#_b__
+_b__bbbbbbb__b_
+____#_____#____
+</map>
+  <name>So close!</name>
+  <author>Jack</author>
+  <description>
+  Where are so close!!
+  </description>
+</qtalmap>
