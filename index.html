@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Qtalbomber : A simple but funny C++ and Qt bomberman game">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Qtalbomber</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/jexhson/qtalbomber">View on GitHub</a>
+
+          <h1 id="project_title">Qtalbomber</h1>
+          <h2 id="project_tagline">A simple but funny C++ and Qt bomberman game</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/jexhson/qtalbomber/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/jexhson/qtalbomber/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <p><img src="https://raw.githubusercontent.com/jexhson/qtalbomber/master/doc/figures/qtalbomber.png" alt="qtalbomber"></p>
+
+<h2>
+<a id="game-overview" class="anchor" href="#game-overview" aria-hidden="true"><span class="octicon octicon-link"></span></a>Game overview</h2>
+
+<p>To activate or deactivate a player in the game, simply click on it icon
+before starting the game. When the player icon borders are blue, the
+player is active, when becoming red, the player is dead and gray border
+means that the player is not active. To distinguish players, refers to
+the player icon color.</p>
+
+<h2>
+<a id="application-file-architecture" class="anchor" href="#application-file-architecture" aria-hidden="true"><span class="octicon octicon-link"></span></a>Application file architecture</h2>
+
+<p>The <em>Maps</em> directory contains the available game fields (see map
+creation for more informations). Only maps in this directory will be
+selected at game start.</p>
+
+<p>The <em>Sounds</em> directory includes sound files (<em>.wav</em> format) used by
+QtalBomber. If you want to change one or more of these sounds, be sure
+to assign the filename that the one you are replacing. Feel free to add
+your favorite song as a soundtrack for your games!</p>
+
+<h2>
+<a id="user-controls" class="anchor" href="#user-controls" aria-hidden="true"><span class="octicon octicon-link"></span></a>User controls</h2>
+
+<table>
+<thead>
+<tr>
+<th>Action</th>
+<th>Player 1</th>
+<th>Player 2</th>
+<th>Player 3</th>
+<th>Player 4</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Up</td>
+<td>Top arrow</td>
+<td>Z</td>
+<td>U</td>
+<td>G</td>
+</tr>
+<tr>
+<td>Down</td>
+<td>Bottom arrow</td>
+<td>S</td>
+<td>J</td>
+<td>B</td>
+</tr>
+<tr>
+<td>Left</td>
+<td>Left arrow</td>
+<td>Q</td>
+<td>H</td>
+<td>V</td>
+</tr>
+<tr>
+<td>Right</td>
+<td>Right arrow</td>
+<td>D</td>
+<td>K</td>
+<td>N</td>
+</tr>
+<tr>
+<td>Drop bomb</td>
+<td>Cmd (or right Alt)</td>
+<td>A</td>
+<td>Y</td>
+<td>Space</td>
+</tr>
+</tbody>
+</table>
+
+<h2>
+<a id="map-creation" class="anchor" href="#map-creation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Map creation</h2>
+
+<p>You can create your own mazes game, use your imagination and creativity
+to make maps new and fun. To do this, create an XML file according to
+the maps available in the <em>Maps</em> directory. See below for symbol meaning
+and a map example.</p>
+
+<p><strong>WARNING:</strong> The card must not exceed 15x15 characters. The borders are
+generated automatically, it is not necessary to draw them.</p>
+
+<h3>
+<a id="available-map-symbols" class="anchor" href="#available-map-symbols" aria-hidden="true"><span class="octicon octicon-link"></span></a>Available map symbols</h3>
+
+<table>
+<thead>
+<tr>
+<th>Symbol</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>#</td>
+<td>Unbreakable block</td>
+</tr>
+<tr>
+<td>b</td>
+<td>Breakable block</td>
+</tr>
+<tr>
+<td>_</td>
+<td>Unused space</td>
+</tr>
+<tr>
+<td>1-4</td>
+<td>Start position of a player. Must be unique</td>
+</tr>
+</tbody>
+</table>
+
+<h3>
+<a id="map-xml-example" class="anchor" href="#map-xml-example" aria-hidden="true"><span class="octicon octicon-link"></span></a>Map XML example</h3>
+
+<div class="highlight highlight-xml"><pre>&lt;?<span class="pl-ent">xml</span><span class="pl-e"> version</span>=<span class="pl-s"><span class="pl-pds">"</span>1.0<span class="pl-pds">"</span></span><span class="pl-e"> encoding</span>=<span class="pl-s"><span class="pl-pds">"</span>utf-8<span class="pl-pds">"</span></span>?&gt;
+&lt;<span class="pl-ent">qtalmap</span> <span class="pl-e">xmlns</span>=<span class="pl-s"><span class="pl-pds">"</span>http://www.bombermanproject.com<span class="pl-pds">"</span></span>
+         <span class="pl-e">xmlns</span><span class="pl-e">:</span><span class="pl-e">xsi</span>=<span class="pl-s"><span class="pl-pds">"</span>http://www.w3.org/2001/XMLSchema-instance<span class="pl-pds">"</span></span>
+         <span class="pl-e">xsi</span><span class="pl-e">:</span><span class="pl-e">schemaLocation</span>=<span class="pl-s"><span class="pl-pds">"</span>http://www.bombermanproject.com qtalbomber.xsd<span class="pl-pds">"</span></span>&gt;
+  &lt;<span class="pl-ent">map</span>&gt;
+_______________
+_#_#_#_#_#_#_#_
+__1___bbb______
+_#_#_#_#_#_#b#_
+____#___#___b__
+_#_#_#_#_#_#b#_
+_2______b___b__
+_#_#_#_#_#_#_#_
+__#___b________
+_#_#_#_#_#_#_#_
+________b__#___
+_#_#_#_#_#_#_#_
+___b__#_____3__
+_#_#_#_#_#_#_#_
+______#__4_____
+&lt;/<span class="pl-ent">map</span>&gt;
+  &lt;<span class="pl-ent">name</span>&gt;Default Map&lt;/<span class="pl-ent">name</span>&gt;
+  &lt;<span class="pl-ent">author</span>&gt;Billy Bob&lt;/<span class="pl-ent">author</span>&gt;
+  &lt;<span class="pl-ent">description</span>&gt;
+    Rah-rah-ah-ah-ah-ah!
+    Roma-roma-mamaa!
+    Ga-ga-ooh-la-la!
+  &lt;/<span class="pl-ent">description</span>&gt;
+&lt;/<span class="pl-ent">qtalmap</span>&gt;</pre></div>
+
+<h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p>qtalbomber is released under the MIT License. See <a href="https://github.com/jexhson/qtalbomber/blob/master/LICENSE">LICENSE</a> file for
+details.</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Qtalbomber maintained by <a href="https://github.com/jexhson">jexhson</a></p>
+        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
