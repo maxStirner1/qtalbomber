@@ -1,5 +1,9 @@
+QT += core
+QT += gui
+QT += widgets
 QT += xml
 QT += xmlpatterns
+QT += multimedia
 TARGET = qtalbomber
 CONFIG += qt
 TEMPLATE = app

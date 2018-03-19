@@ -11,6 +11,8 @@
 #include <QApplication>
 #include "gamefield.h"
 #include <QTime>
+#include <QWidget>
+#include <QtGui>
 
 
 int main(int argc, char *argv[])

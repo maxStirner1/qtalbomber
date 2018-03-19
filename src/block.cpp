@@ -1,4 +1,9 @@
 #include "block.h"
+#include <QtGui>
+#include <QtWidgets>
+#include <QSound>
+#include <QGraphicsRectItem>
+#include <QAbstractGraphicsShapeItem>
 
 /*!
 * Creates a rectangle to represent block

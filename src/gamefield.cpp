@@ -1,3 +1,7 @@
+#include <QtGui>
+#include <QPushButton>
+#include <QMessageBox>
+#include <QtWidgets>
 #include "gamefield.h"
 
 /*! Creates interface of the game.

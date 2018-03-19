@@ -7,6 +7,9 @@
 #include <QObject>
 #include "constant.h"
 #include "bomb.h"
+#include <QtWidgets>
+#include <QGraphicsRectItem>
+#include <QSound>
 
 /*!
 * Manages flams

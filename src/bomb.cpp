@@ -1,4 +1,6 @@
-
+#include <QtGui>
+#include <QtWidgets>
+#include <QSound>
 #include "bomb.h"
 
 /*!

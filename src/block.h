@@ -7,6 +7,7 @@
 #include <QTimer>
 #include <QObject>
 #include "constant.h"
+#include <QGraphicsRectItem>
 
 /*!
 * Manage blocks (breakables or not)

@@ -6,6 +6,7 @@
 #include <QTimer>
 #include <QObject>
 #include "constant.h"
+#include <QGraphicsEllipseItem>
 
 /*! Create a new bomb on the gamefield.
  *

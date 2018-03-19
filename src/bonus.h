@@ -6,6 +6,9 @@
 #include <QObject>
 #include "player.h"
 #include "constant.h"
+#include <QtWidgets>
+#include <QSound>
+#include <QGraphicsRectItem>
 
 /*!
 * Manages bonuses
@@ -23,7 +26,7 @@ private:
 public:
     Bonus(int type);
     ~Bonus();
-    int type();
+    int type() const;
     QList<int> attributes();
 };
 

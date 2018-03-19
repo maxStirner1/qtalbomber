@@ -46,7 +46,7 @@ Bonus::Bonus(int type)
 Bonus::~Bonus() {
 }
 
-int Bonus::type() {
+int Bonus::type() const {
     return m_type;
 }
 

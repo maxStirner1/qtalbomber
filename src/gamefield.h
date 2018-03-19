@@ -11,6 +11,10 @@
 #include "bonus.h"
 #include "constant.h"
 #include "about.h"
+#include <QGraphicsView>
+#include <QSound>
+#include <QSpinBox>
+#include <QComboBox>
 
 /*!
  * Manage graphical interface and collisions between different elements

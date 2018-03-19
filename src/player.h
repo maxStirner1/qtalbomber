@@ -5,6 +5,8 @@
 #include <QTimer>
 #include <QObject>
 #include "constant.h"
+#include <QGraphicsRectItem>
+#include <QGraphicsPixmapItem>
 
 class Player : public QObject, public QGraphicsPixmapItem
 {
